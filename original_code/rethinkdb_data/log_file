@@ -1,0 +1,16 @@
+2019-12-15T23:33:25.906861000 0.007248s notice: Recursively removing directory /Users/ichyr/go/src/github.com/ichyr/rtsupportserver/rethinkdb_data/tmp
+2019-12-15T23:33:25.908821000 0.009212s notice: Initializing directory /Users/ichyr/go/src/github.com/ichyr/rtsupportserver/rethinkdb_data
+2019-12-15T23:33:25.908957000 0.009344s info: Creating a default database for your convenience. (This is because you ran 'rethinkdb' without 'create', 'serve', or '--join', and the directory '/Users/ichyr/go/src/github.com/ichyr/rtsupportserver/rethinkdb_data' did not already exist or is empty.)
+2019-12-15T23:33:25.909004000 0.009391s notice: Running rethinkdb 2.3.6 (CLANG 11.0.0 (clang-1100.0.33.8))...
+2019-12-15T23:33:25.915153000 0.015541s notice: Running on Darwin 19.2.0 x86_64
+2019-12-15T23:33:25.915198000 0.015585s notice: Loading data from directory /Users/ichyr/go/src/github.com/ichyr/rtsupportserver/rethinkdb_data
+2019-12-15T23:33:26.086777000 0.187169s info: Automatically using cache size of 1418 MB
+2019-12-15T23:33:26.087257000 0.187649s notice: Listening for intracluster connections on port 29015
+2019-12-15T23:33:26.088437000 0.188829s notice: Listening for client driver connections on port 28015
+2019-12-15T23:33:26.088545000 0.188937s notice: Listening for administrative HTTP connections on port 8080
+2019-12-15T23:33:26.088547000 0.188938s notice: Listening on cluster addresses: 127.0.0.1, ::1
+2019-12-15T23:33:26.088549000 0.188941s notice: Listening on driver addresses: 127.0.0.1, ::1
+2019-12-15T23:33:26.088551000 0.188943s notice: Listening on http addresses: 127.0.0.1, ::1
+2019-12-15T23:33:26.088555000 0.188946s notice: To fully expose RethinkDB on the network, bind to all addresses by running rethinkdb with the `--bind all` command line option.
+2019-12-15T23:33:26.088558000 0.188950s notice: Server ready, "Petro_local_nbe" e0a25a9e-5704-400f-80c6-c2d5a8db7c64
+2019-12-15T23:33:26.718792000 0.819203s warn: Problem when checking for new versions of RethinkDB: HTTP request to update.rethinkdb.com failed.
