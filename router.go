@@ -37,7 +37,17 @@ func (r *Router) Handle(msgName string, handler Handler) {
 func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	socket, err := upgrader.Upgrade(w, req, nil)
 	if err != nil {
-		fmt.Println(err)
+		w.WriteHeader(http.StatusInternalServerError)
+		fmt.Fprint(w, err.Error())
 		return
 	}
+
+	client := NewClient(socket)
+
+	// methods below need to run in separate goroutines
+	// lets spawn Write method in it's own goroutine and
+	// let Read method use goroutine that was created when
+	// ServeHTTP method was called
+	go client.Write()
+	client.Read()
 }
