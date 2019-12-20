@@ -33,6 +33,12 @@ func (r *Router) Handle(msgName string, handler Handler) {
 	r.rules[msgName] = handler
 }
 
+// FindHandler ...
+func (r *Router) FindHandler(msg string) (Handler, bool) {
+	handler, found := r.rules[msg]
+	return handler, found
+}
+
 // ServeHTTP ...
 func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	socket, err := upgrader.Upgrade(w, req, nil)
@@ -42,7 +48,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	client := NewClient(socket)
+	client := NewClient(socket, e.FindHandler)
 
 	// methods below need to run in separate goroutines
 	// lets spawn Write method in it's own goroutine and
