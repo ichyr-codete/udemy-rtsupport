@@ -48,7 +48,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	client := NewClient(socket, e.FindHandler)
+	client := NewClient(socket, r.FindHandler())
 
 	// methods below need to run in separate goroutines
 	// lets spawn Write method in it's own goroutine and

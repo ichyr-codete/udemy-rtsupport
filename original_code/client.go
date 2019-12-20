@@ -1,4 +1,4 @@
-package main
+package mainOriginal
 
 import (
 	r "github.com/dancannon/gorethink"
