@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/websocket"
+	r "gopkg.in/rethinkdb/rethinkdb-go.v5"
 )
 
 var upgrader = websocket.Upgrader{
@@ -18,13 +19,15 @@ type Handler func(*Client, interface{})
 
 // Router ...
 type Router struct {
-	rules map[string]Handler
+	rules   map[string]Handler
+	session *r.Session
 }
 
 // NewRouter ...
-func NewRouter() *Router {
+func NewRouter(session *r.Session) *Router {
 	return &Router{
-		rules: make(map[string]Handler),
+		rules:   make(map[string]Handler),
+		session: session,
 	}
 }
 
@@ -48,7 +51,7 @@ func (r *Router) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	client := NewClient(socket, r.FindHandler)
+	client := NewClient(socket, r.FindHandler, r.session)
 
 	// methods below need to run in separate goroutines
 	// lets spawn Write method in it's own goroutine and
