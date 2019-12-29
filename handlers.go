@@ -36,7 +36,7 @@ func subscribeChannel(client *Client, data interface{}) {
 	stop := client.NewStopChannel(ChannelStop)
 	result := make(chan r.ChangeResponse)
 
-	cursor, err := r.Table("channels").
+	cursor, err := r.Table("channel").
 		Changes(r.ChangesOpts{IncludeInitial: true}).
 		Run(client.session)
 	if err != nil {
@@ -66,4 +66,8 @@ func subscribeChannel(client *Client, data interface{}) {
 			}
 		}
 	}()
+}
+
+func unsubscribeChannel(client *Client, data interface{}) {
+	client.StopForKey(ChannelStop)
 }
