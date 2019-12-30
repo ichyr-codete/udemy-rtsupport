@@ -1,6 +1,8 @@
 package main
 
 import (
+	"log"
+
 	"github.com/gorilla/websocket"
 	r "gopkg.in/rethinkdb/rethinkdb-go.v5"
 )
@@ -21,6 +23,8 @@ type Client struct {
 	findHandler  FindHandler
 	session      *r.Session
 	stopChannels map[int]chan bool
+	id           string
+	userName     string
 }
 
 // NewStopChannel ...
@@ -73,11 +77,23 @@ func (client *Client) Close() {
 
 // NewClient ...
 func NewClient(socket *websocket.Conn, findHandler FindHandler, session *r.Session) *Client {
+	var user User
+	user.Name = "anonymous"
+	res, err := r.Table("user").Insert(user).RunWrite(session)
+	if err != nil {
+		log.Println(err.Error())
+	}
+	var id string
+	if len(res.GeneratedKeys) > 0 {
+		id = res.GeneratedKeys[0]
+	}
 	return &Client{
 		send:         make(chan Message),
 		socket:       socket,
 		findHandler:  findHandler,
 		session:      session,
 		stopChannels: make(map[int]chan bool),
+		id:           id,
+		userName:     user.Name,
 	}
 }
