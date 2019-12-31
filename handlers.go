@@ -109,7 +109,7 @@ func unsubscribeUser(client *Client, data interface{}) {
 	client.StopForKey(ChannelStop)
 }
 
-func editChannelMessage(client *Client, data interface{}) {
+func addChannelMessage(client *Client, data interface{}) {
 	var channelMessage ChannelMessage
 	err := mapstructure.Decode(data, &channelMessage)
 
@@ -141,8 +141,8 @@ func subscribeChannelMessage(client *Client, data interface{}) {
 		}
 		stop := client.NewStopChannel(MessageStop)
 		cursor, err := r.Table("message").
-			OrderBy(r.OrderByOpts{Index: r.Desc("createdAt")}).
-			Filter(r.Row.Field("ChannelId").Eq(channelId)).
+			OrderBy(r.OrderByOpts{Index: "createdAt"}).
+			Filter(r.Row.Field("channelId").Eq(channelId)).
 			Changes(r.ChangesOpts{IncludeInitial: true}).
 			Run(client.session)
 		if err != nil {

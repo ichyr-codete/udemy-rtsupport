@@ -51,7 +51,7 @@ func main() {
 	router.Handle("user unsubscribe", unsubscribeUser)
 
 	// message handlers
-	router.Handle("message edit", editChannelMessage)
+	router.Handle("message add", addChannelMessage)
 	router.Handle("message subscribe", subscribeChannelMessage)
 	router.Handle("message unsubscribe", unsubscribeChannelMessage)
 
